@@ -1,15 +1,32 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import HomeHeader from "../components/home/home-header.astro";
 import Strapi from "strapi-sdk-js";
+import qs from "qs";
 
 const strapi = new Strapi({
   url: import.meta.env.STRAPI_URL,
 });
-const home = await strapi.find("home", {
-  populate: "*",
+const sqString = qs.stringify({
+  populate: {
+    photos: {
+      populate: "image.formats",
+    },
+    sections: {
+      populate: ["images"],
+    },
+  },
 });
+const request = new Request(
+  `${import.meta.env.STRAPI_URL}/api/home?${sqString}`
+);
+console.log(request.url);
+const response = await fetch(request, {
+  method: "GET",
+});
+const home = await response.json();
 ---
 
 <Layout title="Margaux Frowein 📷">
-  {JSON.stringify(home)}
+  <HomeHeader photos={home.data.attributes.photos.data} />
 </Layout>
