@@ -1,5 +1,15 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Strapi from "strapi-sdk-js";
+
+const strapi = new Strapi({
+  url: import.meta.env.STRAPI_URL,
+});
+const home = await strapi.find("home", {
+  populate: "*",
+});
 ---
 
-<Layout title="Margaux Frowein 📷" />
+<Layout title="Margaux Frowein 📷">
+  {JSON.stringify(home)}
+</Layout>
