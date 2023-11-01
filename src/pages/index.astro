@@ -2,7 +2,6 @@
 import Layout from "../layouts/Layout.astro";
 import HomeHeader from "../components/home/home-header.astro";
 import qs from "qs";
-import { Debug } from "astro:components";
 
 const sqString = qs.stringify({
   populate: {
@@ -21,10 +20,8 @@ const response = await fetch(request, {
   method: "GET",
 });
 const home = await response.json();
-const testEnv = import.meta.env.PROD;
 ---
 
 <Layout title="Margaux Frowein 📷">
-  <Debug testEnv={testEnv} />
   <HomeHeader photos={home.data.attributes.photos.data} />
 </Layout>
