@@ -1,0 +1,29 @@
+---
+import {
+  getDataAttributes,
+  getImageUrlFromFormat,
+} from "../../lib/strapi-utils";
+
+interface Props {
+  section: any;
+}
+const { section } = Astro.props;
+const imageData = getDataAttributes<any>(section.cover);
+const imageMediumUrl = getImageUrlFromFormat(
+  getDataAttributes(imageData.image),
+  "medium"
+);
+---
+
+<article class="group overflow-hidden relative">
+  <div
+    class="bg-cover bg-center w-full h-full absolute top-0 left-0 group-hover:opacity-60 group-hover:scale-110 transition-all duration-500"
+    style=`background-image: url('${imageMediumUrl}')`
+  >
+  </div>
+  <h2
+    class="w-full h-full absolute top-0 left-0 opacity-0 group-hover:opacity-100 group-hover:shadow text-4xl flex justify-center items-center transition-opacity duration-500 ease-in-out"
+  >
+    {section.title}
+  </h2>
+</article>

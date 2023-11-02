@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import HomeHeader from "../components/home/home-header.astro";
 import qs from "qs";
+import HomeSections from "../components/home/home-sections.astro";
 
 const sqString = qs.stringify({
   populate: {
@@ -9,7 +10,7 @@ const sqString = qs.stringify({
       populate: "image.formats",
     },
     sections: {
-      populate: ["images"],
+      populate: { cover: { populate: "image.formats" } },
     },
   },
 });
@@ -24,4 +25,5 @@ const home = await response.json();
 
 <Layout title="Margaux Frowein 📷">
   <HomeHeader photos={home.data.attributes.photos.data} />
+  <HomeSections sections={home.data.attributes.sections.data} />
 </Layout>

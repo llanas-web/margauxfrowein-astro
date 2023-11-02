@@ -1,0 +1,11 @@
+---
+import HomeSectionItem from "./home-section-item.astro";
+interface Props {
+  sections: any[];
+}
+const { sections } = Astro.props;
+---
+
+<div class="grid grid-cols-fit-25 auto-rows-[400px] gap-4 p-24">
+  {sections.map(({ attributes }) => <HomeSectionItem section={attributes} />)}
+</div>
