@@ -23,9 +23,10 @@ const imageMediumUrl = getImageUrlFromFormat(
     style=`background-image: url('${imageMediumUrl}')`
   >
   </div>
-  <h2
+  <a
+    href={`sections/${section.url}`}
     class="w-full h-full absolute top-0 left-0 opacity-0 group-hover:opacity-100 group-hover:shadow text-4xl flex justify-center items-center text-center transition-opacity duration-500 ease-in-out cursor-pointer"
   >
     {section.title}
-  </h2>
+  </a>
 </article>

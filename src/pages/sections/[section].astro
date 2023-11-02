@@ -1,0 +1,34 @@
+---
+import type { GetStaticPaths } from "astro";
+import Layout from "../../layouts/Layout.astro";
+import HomeHeader from "../../components/home/home-header.astro";
+import qs from "qs";
+
+export const getStaticPaths = (async () => {
+  const sqString = qs.stringify({
+    populate: {
+      sections: {
+        fields: "url",
+      },
+    },
+  });
+  const request = new Request(
+    `${import.meta.env.STRAPI_URL}/api/home?${sqString}`
+  );
+  const response = await fetch(request, {
+    method: "GET",
+  });
+  const home = await response.json();
+  const section = home.data.attributes.sections.data;
+  const paths = section.map((section) => ({
+    params: { section: section.attributes.url },
+  }));
+  return paths;
+}) satisfies GetStaticPaths;
+
+const { section } = Astro.params;
+---
+
+<Layout title="section">
+  <h2>{section}</h2>
+</Layout>
