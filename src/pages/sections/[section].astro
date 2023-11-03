@@ -1,6 +1,7 @@
 ---
 import type { GetStaticPaths } from "astro";
-import Layout from "../../layouts/Layout.astro";
+import SectionLayout from "../../layouts/section-layout.astro";
+import SectionHeader from "../../components/section/section-header.astro";
 import { useStrapi } from "../../api/strapi";
 
 export const getStaticPaths = (async () => {
@@ -14,11 +15,11 @@ export const getStaticPaths = (async () => {
 const { section } = Astro.params;
 
 const [{ attributes }] = await useStrapi().getSectionDetails(section);
-const { title, description } = attributes;
+const { title, description, cover } = attributes;
 ---
 
-<Layout title={title}>
-  <div class="p-24">
-    <h2 class="">{title}</h2>
-  </div>
-</Layout>
+<SectionLayout title={title}>
+  <article class="">
+    <SectionHeader title={title} cover={cover.data.attributes} />
+  </article>
+</SectionLayout>

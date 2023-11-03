@@ -52,6 +52,9 @@ export const useStrapi = () => {
             photos: {
               populate: "image.formats",
             },
+            cover: {
+              populate: "image.formats",
+            },
           },
         },
         { encodeValuesOnly: true }

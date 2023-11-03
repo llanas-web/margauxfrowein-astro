@@ -1,5 +1,5 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import HomeLayout from "../layouts/home-layout.astro";
 import HomeHeader from "../components/home/home-header.astro";
 import HomeSections from "../components/home/home-sections.astro";
 import { useStrapi } from "../api/strapi";
@@ -8,7 +8,7 @@ const { getHome } = useStrapi();
 const home = await getHome();
 ---
 
-<Layout title="Margaux Frowein 📷">
+<HomeLayout title="Margaux Frowein 📷">
   <HomeHeader photos={home.data.attributes.photos.data} />
   <HomeSections sections={home.data.attributes.sections.data} />
-</Layout>
+</HomeLayout>

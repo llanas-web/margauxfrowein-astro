@@ -1,0 +1,30 @@
+---
+interface Props {
+  title: string;
+  cover: any;
+}
+
+const { title, cover } = Astro.props;
+---
+
+<header
+  class="min-h-screen py-20 w-[120%] flex flex-row justify-center items-center bg-slate-100"
+>
+  <div class="w-1/3 p-12">
+    <h2 class="text-4xl text-slate-700">{title}</h2>
+  </div>
+  <div class="p-20">
+    <img
+      class="aspect-video w-full object-cover rounded-xl shadow-2xl perspective transition-all"
+      src={cover.image.data.attributes.url}
+      alt=""
+    />
+  </div>
+</header>
+
+<style>
+  .perspective {
+    transform: perspective(600px) rotateY(-15deg) rotateZ(2deg) rotateX(5deg)
+      scale(1.3);
+  }
+</style>
