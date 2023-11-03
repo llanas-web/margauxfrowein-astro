@@ -1,10 +1,18 @@
 ---
+import {
+  getDataAttributes,
+  getImageUrlFromFormat,
+} from "../../lib/strapi-utils";
 interface Props {
   title: string;
   cover: any;
 }
 
 const { title, cover } = Astro.props;
+const imageUrl = getImageUrlFromFormat(
+  getDataAttributes(cover.image),
+  "original"
+);
 ---
 
 <header
@@ -16,7 +24,7 @@ const { title, cover } = Astro.props;
   <div class="section-header__cover h-full flex px-0 py-20 md:p-10">
     <img
       class="aspect-video object-cover rounded-xl shadow-2xl perspective"
-      src={cover.image.data.attributes.url}
+      src={imageUrl}
       alt=""
     />
   </div>

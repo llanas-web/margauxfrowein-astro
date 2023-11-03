@@ -1,0 +1,31 @@
+---
+import {
+  getImageUrlFromFormat,
+  getDataAttributes,
+} from "../../lib/strapi-utils";
+
+interface Props {
+  photo: any;
+}
+
+const { photo } = Astro.props;
+const imageUrl = getImageUrlFromFormat(
+  getDataAttributes(photo.attributes.image),
+  "medium"
+);
+---
+
+<li
+  class="group flex-auto h-28 md:h-80 relative cursor-pointer shadow-xl md:rounded-md hover:md:rounded-xl overflow-hidden duration-500 transition-all"
+>
+  <img
+    class="object-cover w-full h-full group-hover:scale-110 transition-all duration-500"
+    src={imageUrl}
+    alt={photo.attributes.description}
+  />
+  <div
+    class="absolute w-full h-auto bottom-0 left-0 flex justify-center items-center transition-all durantion-500 scale-0 group-hover:scale-100 bg-slate-700/40 text-slate-100"
+  >
+    <span>{photo.attributes.title}</span>
+  </div>
+</li>

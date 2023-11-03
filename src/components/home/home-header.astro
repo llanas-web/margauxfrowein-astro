@@ -1,4 +1,5 @@
 ---
+import { getImageUrlFromFormat } from "../../lib/strapi-utils";
 interface Props {
   photos: any[];
 }
@@ -26,8 +27,11 @@ const { photos } = Astro.props;
         <div class="swiper-slide">
           <img
             class="h-screen object-cover w-full"
-            src={attributes.image.data.attributes.url}
-            alt=""
+            src={getImageUrlFromFormat(
+              attributes.image.data.attributes,
+              "original"
+            )}
+            alt={attributes.description}
           />
         </div>
       ))

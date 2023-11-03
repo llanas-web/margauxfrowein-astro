@@ -9,7 +9,7 @@ interface Props {
 }
 const { section } = Astro.props;
 const imageData = getDataAttributes<any>(section.cover);
-const imageMediumUrl = getImageUrlFromFormat(
+const imageUrl = getImageUrlFromFormat(
   getDataAttributes(imageData.image),
   "medium"
 );
@@ -20,7 +20,7 @@ const imageMediumUrl = getImageUrlFromFormat(
 >
   <div
     class="bg-cover bg-center w-full h-full absolute top-0 left-0 group-hover:opacity-60 group-hover:scale-110 transition-all duration-500"
-    style=`background-image: url('${imageMediumUrl}')`
+    style=`background-image: url('${imageUrl}')`
   >
   </div>
   <a
