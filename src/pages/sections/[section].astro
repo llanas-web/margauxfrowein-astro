@@ -4,6 +4,7 @@ import SectionLayout from "../../layouts/section-layout.astro";
 import SectionHeader from "../../components/section/section-header.astro";
 import { useStrapi } from "../../api/strapi";
 import SectionItem from "../../components/section/section-item.astro";
+import { getImageUrlFromFormat } from "../../lib/strapi-utils";
 
 export const getStaticPaths = (async () => {
   const { getSectionsUrl } = useStrapi();
@@ -19,6 +20,30 @@ const [{ attributes }] = await useStrapi().getSectionDetails(section);
 const { title, photos, cover } = attributes;
 ---
 
+<script>
+  import Swiper from "swiper/bundle";
+  import "swiper/css/bundle";
+
+  const swiper = new Swiper(".modal-swiper", {
+    lazyPreloaderClass: "swiper-lazy-preloader",
+    spaceBetween: 30,
+  });
+
+  const sectionItems = document.querySelectorAll(".section-item");
+  sectionItems.forEach((elem, index) =>
+    elem.addEventListener("click", () => {
+      document.getElementById("section-modal")?.classList.remove("hidden");
+      swiper.slideTo(index);
+    })
+  );
+
+  const closingModal = document.querySelector("#section-modal__closing");
+  closingModal?.addEventListener("click", () => {
+    console.log("clicked");
+    document.getElementById("section-modal")?.classList.add("hidden");
+  });
+</script>
+
 <SectionLayout title={title}>
   <article class="section">
     <SectionHeader title={title} cover={cover.data.attributes} />
@@ -28,6 +53,65 @@ const { title, photos, cover } = attributes;
       </ul>
     </section>
   </article>
+  <div
+    id="section-modal"
+    class="hidden absolute w-full h-full top-0 left-0 p-6 bg-slate-100/90 z-10"
+  >
+    <div
+      id="section-modal__closing"
+      class="fixed top-0 left-0 cursor-pointer p-6 z-20"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+        ></path>
+      </svg>
+    </div>
+    <div class="swiper modal-swiper h-full w-full">
+      <div class="swiper-wrapper">
+        {
+          photos.data.map(({ attributes }: any) => (
+            <figure class="swiper-slide relative">
+              <img
+                class="w-full h-full object-contain pb-12"
+                src={getImageUrlFromFormat(
+                  attributes.image.data.attributes,
+                  "original"
+                )}
+                alt={attributes.description}
+                loading="lazy"
+              />
+              <div class="absolute bottom-0 left-0 w-full">
+                <h2 class="text-xl text-slate-700 text-center">
+                  {attributes.title}
+                </h2>
+              </div>
+              <div class="swiper-lazy-preloader">
+                <img
+                  class="w-full h-full object-contain pb-12"
+                  src={getImageUrlFromFormat(
+                    attributes.image.data.attributes,
+                    "thumbnail"
+                  )}
+                  alt={attributes.description}
+                  loading="lazy"
+                />
+              </div>
+            </figure>
+          ))
+        }
+      </div>
+    </div>
+  </div>
 </SectionLayout>
 
 <style>
