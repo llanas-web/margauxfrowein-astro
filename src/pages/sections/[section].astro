@@ -22,10 +22,10 @@ const { title, photos, cover } = attributes;
   <article class="section">
     <SectionHeader title={title} cover={cover.data.attributes} />
     <section class="p-6">
-      <ul class="flex flex-wrap gap-3">
+      <ul class="flex flex-wrap gap-1 md:gap-3">
         {
           photos.data.map((photo: any) => (
-            <li class="group flex-auto h-80 relative cursor-pointer shadow-xl rounded-md hover:rounded-xl overflow-hidden duration-500 transition-all">
+            <li class="group flex-auto h-28 md:h-80 relative cursor-pointer shadow-xl md:rounded-md hover:md:rounded-xl overflow-hidden duration-500 transition-all">
               <img
                 class="object-cover w-full h-full group-hover:scale-110 transition-all duration-500"
                 src={photo.attributes.image.data.attributes.url}
