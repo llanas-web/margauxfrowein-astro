@@ -8,14 +8,14 @@ const { title, cover } = Astro.props;
 ---
 
 <header
-  class="min-h-screen py-20 w-[120%] flex flex-row justify-center items-center bg-slate-100"
+  class="section-header relative h-screen min-h-screen p-10 flex flex-row justify-center items-center gap-10"
 >
-  <div class="w-1/3 p-12">
+  <div class="section-header__title w-1/3">
     <h2 class="text-4xl text-slate-700">{title}</h2>
   </div>
-  <div class="p-20">
+  <div class="section-header__cover h-full flex p-10">
     <img
-      class="aspect-video w-full object-cover rounded-xl shadow-2xl perspective transition-all"
+      class="aspect-video object-cover rounded-xl shadow-2xl perspective"
       src={cover.image.data.attributes.url}
       alt=""
     />
@@ -23,8 +23,16 @@ const { title, cover } = Astro.props;
 </header>
 
 <style>
+  .section-header {
+    perspective: 10px;
+    transform-style: preserve-3d;
+    z-index: -1;
+  }
+
+  .section-header__cover {
+    transform: translateZ(3px) scale(0.5);
+  }
   .perspective {
-    transform: perspective(600px) rotateY(-15deg) rotateZ(2deg) rotateX(5deg)
-      scale(1.3);
+    transform: perspective(600px) rotateY(-15deg) rotateZ(2deg) rotateX(5deg);
   }
 </style>
