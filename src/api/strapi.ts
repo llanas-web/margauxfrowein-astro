@@ -36,7 +36,7 @@ export const useStrapi = () => {
       method: "GET",
     });
     const home = await response.json();
-    return home.sections.data.map(
+    return home.data.attributes.sections.data.map(
       ({ attributes }: { attributes: { url: string } }) => attributes.url
     );
   };
