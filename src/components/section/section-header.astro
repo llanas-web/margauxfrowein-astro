@@ -3,16 +3,13 @@ import {
   getDataAttributes,
   getImageUrlFromFormat,
 } from "../../lib/strapi-utils";
+import StrapiImage from "../lib/strapi/strapi-image.astro";
 interface Props {
   title: string;
   cover: any;
 }
 
 const { title, cover } = Astro.props;
-const imageUrl = getImageUrlFromFormat(
-  getDataAttributes(cover.image),
-  "original"
-);
 ---
 
 <header
@@ -21,11 +18,12 @@ const imageUrl = getImageUrlFromFormat(
   <div class="section-header__title w-1/3">
     <h2 class="text-4xl text-slate-700">{title}</h2>
   </div>
-  <div class="section-header__cover h-full flex px-0 py-20 md:p-10">
-    <img
-      class="aspect-video object-cover rounded-xl shadow-2xl perspective"
-      src={imageUrl}
-      alt=""
+  <div class="section-header__cover h-full w-full flex px-0 py-20 md:p-10">
+    <StrapiImage
+      image={getDataAttributes(cover.image)}
+      format="original"
+      classNames="aspect-video object-cover rounded-xl shadow-2xl perspective"
+      loading={"lazy"}
     />
   </div>
 </header>
@@ -39,8 +37,5 @@ const imageUrl = getImageUrlFromFormat(
 
   .section-header__cover {
     transform: translateZ(3px) scale(0.5);
-  }
-  .perspective {
-    transform: perspective(600px) rotateY(-15deg) rotateZ(2deg) rotateX(5deg);
   }
 </style>

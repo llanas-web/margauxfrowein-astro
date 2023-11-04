@@ -2,8 +2,9 @@
 import type { GetStaticPaths } from "astro";
 import SectionLayout from "../../layouts/section-layout.astro";
 import SectionHeader from "../../components/section/section-header.astro";
-import { useStrapi } from "../../api/strapi";
 import SectionItem from "../../components/section/section-item.astro";
+import StrapiImage from "../../components/lib/strapi/strapi-image.astro";
+import { useStrapi } from "../../api/strapi";
 import { getImageUrlFromFormat } from "../../lib/strapi-utils";
 
 export const getStaticPaths = (async () => {
@@ -81,14 +82,11 @@ const { title, photos, cover } = attributes;
         {
           photos.data.map(({ attributes }: any) => (
             <figure class="swiper-slide relative">
-              <img
-                class="w-full h-full object-contain pb-12"
-                src={getImageUrlFromFormat(
-                  attributes.image.data.attributes,
-                  "original"
-                )}
-                alt={attributes.description}
-                loading="lazy"
+              <StrapiImage
+                classNames="w-full h-full object-contain pb-12"
+                format="original"
+                image={attributes.image.data.attributes}
+                loading={"lazy"}
               />
               <div class="absolute bottom-0 left-0 w-full">
                 <h2 class="text-xl text-slate-700 text-center">

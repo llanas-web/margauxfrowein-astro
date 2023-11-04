@@ -1,0 +1,54 @@
+---
+import { getImageUrlFromFormat } from "../../../lib/strapi-utils";
+interface Props {
+  image: any;
+  classNames: string;
+  format: "thumbnail" | "small" | "medium" | "large" | "original";
+  loading?: "eager" | "lazy" | null | undefined;
+}
+
+const { image, format, classNames, loading = null } = Astro.props;
+
+const imageUrl = getImageUrlFromFormat(image, format);
+const imagePlaceholderUrl = getImageUrlFromFormat(image, "thumbnail");
+const width = format === "original" ? image.width : image.formats[format].width;
+const height =
+  format === "original" ? image.height : image.formats[format].height;
+---
+
+<script>
+  const images = document.querySelectorAll(".strapi-image");
+  images.forEach((elem) => {
+    const image = elem.querySelector(".strapi-image__real");
+    const placeholder = elem.querySelector(".strapi-image__placeholder");
+    if (!image || !placeholder) return;
+    image.addEventListener("load", () => {
+      setTimeout(() => {
+        image.classList.remove("opacity-0");
+        placeholder.classList.add("opacity-0");
+      }, 200);
+    });
+  });
+</script>
+
+<div class="strapi-image relative h-full w-full">
+  <img
+    class={`strapi-image__real absolute top-0 left-0 w-full h-full opacity-0 transition-opacity duration-500 ${classNames}`}
+    src={imageUrl}
+    alt={image.description}
+    loading={loading}
+  />
+  <img
+    class={`strapi-image__placeholder absolute top-0 left-0 w-full h-full blur-sm transition-opacity duration-500 ${classNames}`}
+    src={imagePlaceholderUrl}
+    alt={image.description}
+    width={width}
+    height={height}
+  />
+</div>
+
+<style>
+  .perspective {
+    transform: perspective(600px) rotateY(-15deg) rotateZ(2deg) rotateX(5deg);
+  }
+</style>

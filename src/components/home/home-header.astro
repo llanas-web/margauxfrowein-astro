@@ -1,5 +1,6 @@
 ---
 import { getImageUrlFromFormat } from "../../lib/strapi-utils";
+import StrapiImage from "../lib/strapi/strapi-image.astro";
 interface Props {
   photos: any[];
 }
@@ -20,18 +21,15 @@ const { photos } = Astro.props;
   });
 </script>
 
-<div class="swiper home-swiper">
+<div class="swiper home-swiper h-screen w-full">
   <div class="swiper-wrapper">
     {
       photos.map(({ attributes }) => (
         <div class="swiper-slide">
-          <img
-            class="h-screen object-cover w-full"
-            src={getImageUrlFromFormat(
-              attributes.image.data.attributes,
-              "original"
-            )}
-            alt={attributes.description}
+          <StrapiImage
+            image={attributes.image.data.attributes}
+            format="original"
+            classNames="h-screen object-cover w-full"
           />
         </div>
       ))
