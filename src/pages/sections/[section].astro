@@ -49,9 +49,11 @@ const { title, photos, cover } = attributes;
   <article class="section">
     <SectionHeader title={title} cover={cover.data.attributes} />
     <section class="p-6">
-      <ul class="flex flex-wrap gap-1 md:gap-3">
+      <div
+        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2"
+      >
         {photos.data.map((photo: any) => <SectionItem photo={photo} />)}
-      </ul>
+      </div>
     </section>
   </article>
   <div

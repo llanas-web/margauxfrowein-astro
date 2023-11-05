@@ -15,8 +15,14 @@ const imageUrl = getImageUrlFromFormat(
 );
 ---
 
-<li
-  class="section-item group flex-auto h-28 md:h-80 relative cursor-pointer shadow-xl md:rounded-md hover:md:rounded-xl overflow-hidden duration-500 transition-all"
+<div
+  class="section-item w-full h-full group relative cursor-pointer shadow-xl md:rounded-md hover:md:rounded-xl overflow-hidden duration-500 transition-all"
+  class:list={{
+    "row-[span_2/auto]":
+      photo.attributes.ratio === "tall" || photo.attributes.ratio === "big",
+    "col-[span_2/auto]":
+      photo.attributes.ratio === "wide" || photo.attributes.ratio === "big",
+  }}
 >
   <img
     class="object-cover w-full h-full group-hover:scale-110 transition-all duration-500"
@@ -28,4 +34,4 @@ const imageUrl = getImageUrlFromFormat(
   >
     <span>{photo.attributes.title}</span>
   </div>
-</li>
+</div>
