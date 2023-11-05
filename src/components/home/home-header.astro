@@ -1,5 +1,4 @@
 ---
-import { getImageUrlFromFormat } from "../../lib/strapi-utils";
 import StrapiImage from "../lib/strapi/strapi-image.astro";
 interface Props {
   photos: any[];
@@ -13,6 +12,10 @@ const { photos } = Astro.props;
 
   new Swiper(".home-swiper", {
     spaceBetween: 30,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false,
+    },
     effect: "fade",
     pagination: {
       el: ".swiper-pagination",

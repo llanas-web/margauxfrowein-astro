@@ -95,17 +95,6 @@ const { title, photos, cover } = attributes;
                   {attributes.title}
                 </h2>
               </div>
-              <div class="swiper-lazy-preloader">
-                <img
-                  class="w-full h-full object-contain pb-12"
-                  src={getImageUrlFromFormat(
-                    attributes.image.data.attributes,
-                    "thumbnail"
-                  )}
-                  alt={attributes.description}
-                  loading="lazy"
-                />
-              </div>
             </figure>
           ))
         }
