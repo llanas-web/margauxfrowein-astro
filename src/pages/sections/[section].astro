@@ -18,7 +18,7 @@ export const getStaticPaths = (async () => {
 const { section } = Astro.params;
 
 const [{ attributes }] = await useStrapi().getSectionDetails(section);
-const { title, photos, cover } = attributes;
+const { title, photos, cover, description } = attributes;
 ---
 
 <script>
@@ -47,7 +47,11 @@ const { title, photos, cover } = attributes;
 
 <SectionLayout title={title}>
   <article class="section">
-    <SectionHeader title={title} cover={cover.data.attributes} />
+    <SectionHeader
+      title={title}
+      cover={cover.data.attributes}
+      description={description}
+    />
     <section class="p-6">
       <div
         class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2"
