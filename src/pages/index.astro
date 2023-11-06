@@ -10,11 +10,12 @@ const home = await getHome();
 ---
 
 <HomeLayout
-  title="Margaux Frowein 📷"
+  title={home.data.attributes.seo_title}
   cover={getImageUrlFromFormat(
-    home.data.attributes.photos.data[0].attributes.image.data.attributes,
-    "small"
+    home.data.attributes.thumbnail.data.attributes,
+    "thumbnail"
   )}
+  description={home.data.attributes.seo_description}
 >
   <HomeHeader photos={home.data.attributes.photos.data} />
   <HomeSections sections={home.data.attributes.sections.data} />

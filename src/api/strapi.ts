@@ -10,6 +10,9 @@ export const useStrapi = () => {
         sections: {
           populate: { cover: { populate: "image.formats" } },
         },
+        thumbnail: {
+          populate: "image.formats",
+        },
       },
     });
     const request = new Request(
@@ -54,6 +57,9 @@ export const useStrapi = () => {
             },
             cover: {
               populate: "image.formats",
+            },
+            thumbnail: {
+              populate: "formats",
             },
           },
         },

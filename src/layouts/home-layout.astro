@@ -2,9 +2,10 @@
 interface Props {
   title: string;
   cover: string;
+  description: string;
 }
 
-const { title, cover } = Astro.props;
+const { title, cover, description } = Astro.props;
 ---
 
 <!doctype html>
@@ -19,18 +20,12 @@ const { title, cover } = Astro.props;
     <!-- META twitter -->
     <meta property="twitter:image" content={cover} />
     <meta property="twitter:title" content={title} />
-    <meta
-      property="twitter:description"
-      content="Margaux FROWEIN photographe portfolio"
-    />
+    <meta property="twitter:description" content={description} />
 
     <meta property="og:image" content={cover} />
     <meta property="og:title" content={title} />
-    <meta
-      property="og:description"
-      content="Margaux FROWEIN photographe portfolio"
-    />
-    <meta property="og:url" content="https://www.margauxfrowein.com" />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content="https://www.margaux-frowein.com" />
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

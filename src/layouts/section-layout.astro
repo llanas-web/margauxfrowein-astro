@@ -1,9 +1,14 @@
 ---
 interface Props {
   title: string;
+  thumbnail: string;
+  description: string;
+  seo_title: string;
+  seo_description: string;
 }
 
-const { title } = Astro.props;
+const { title, description, thumbnail, seo_title, seo_description } =
+  Astro.props;
 ---
 
 <html lang="en">
@@ -13,6 +18,16 @@ const { title } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- META twitter -->
+    <meta property="twitter:image" content={thumbnail} />
+    <meta property="twitter:title" content={seo_title} />
+    <meta property="twitter:description" content={seo_description} />
+
+    <meta property="og:image" content={thumbnail} />
+    <meta property="og:title" content={seo_title} />
+    <meta property="og:description" content={seo_description} />
+    <meta property="og:url" content="https://www.margaux-frowein.com" />
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
