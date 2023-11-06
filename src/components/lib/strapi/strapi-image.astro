@@ -20,15 +20,23 @@ const height =
 <script>
   const images = document.querySelectorAll(".strapi-image");
   images.forEach((elem) => {
-    const image = elem.querySelector(".strapi-image__real");
+    const image = elem.querySelector<HTMLImageElement>(".strapi-image__real");
     const placeholder = elem.querySelector(".strapi-image__placeholder");
+
     if (!image || !placeholder) return;
-    image.addEventListener("load", () => {
-      setTimeout(() => {
-        image.classList.remove("opacity-0");
-        placeholder.classList.add("opacity-0");
-      }, 200);
-    });
+
+    const displayImage = () => {
+      image?.classList.remove("opacity-0");
+      placeholder?.classList.add("opacity-0");
+    };
+
+    if (image.complete) {
+      displayImage();
+    } else {
+      image.addEventListener("load", () => {
+        setTimeout(displayImage, 200);
+      });
+    }
   });
 </script>
 
