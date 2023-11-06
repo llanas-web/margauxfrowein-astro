@@ -31,7 +31,8 @@ const { photos } = Astro.props;
         <div class="swiper-slide">
           <StrapiImage
             image={attributes.image.data.attributes}
-            format="original"
+            description={attributes.description}
+            format="large"
             classNames="h-screen object-cover w-full"
           />
         </div>
