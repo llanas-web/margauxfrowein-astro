@@ -11,7 +11,7 @@ interface Props {
 const { photo } = Astro.props;
 const imageUrl = getImageUrlFromFormat(
   getDataAttributes(photo.attributes.image),
-  "medium"
+  "small"
 );
 ---
 

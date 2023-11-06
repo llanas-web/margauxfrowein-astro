@@ -2,12 +2,13 @@
 import { getImageUrlFromFormat } from "../../../lib/strapi-utils";
 interface Props {
   image: any;
+  description: string;
   classNames: string;
   format: "thumbnail" | "small" | "medium" | "large" | "original";
   loading?: "eager" | "lazy" | null | undefined;
 }
 
-const { image, format, classNames, loading = null } = Astro.props;
+const { image, description, format, classNames, loading = null } = Astro.props;
 
 const imageUrl = getImageUrlFromFormat(image, format);
 const imagePlaceholderUrl = getImageUrlFromFormat(image, "thumbnail");
@@ -35,13 +36,13 @@ const height =
   <img
     class={`strapi-image__real absolute top-0 left-0 w-full h-full opacity-0 transition-opacity duration-500 ${classNames}`}
     src={imageUrl}
-    alt={image.description}
+    alt={description}
     loading={loading}
   />
   <img
     class={`strapi-image__placeholder absolute top-0 left-0 w-full h-full blur-sm transition-opacity duration-500 ${classNames}`}
     src={imagePlaceholderUrl}
-    alt={image.description}
+    alt={description}
     width={width}
     height={height}
   />
