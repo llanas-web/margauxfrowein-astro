@@ -68,6 +68,19 @@ const { title, description, thumbnail, seo_title, seo_description } =
 </html>
 
 <style is:global>
+  * {
+    --swiper-navigation-color: theme(colors.slate.700 / 75%);
+    --swiper-pagination-color: theme(colors.slate.50 / 75%);
+    --swiper-pagination-bullet-size: 0.8em;
+  }
+
+  @media screen(sm) {
+    * {
+      --swiper-pagination-bullet-size: 8px;
+      --swiper-pagination-top-offset: 50%;
+      --swiper-pagination-sides-offset: 10px;
+    }
+  }
   html,
   body {
     margin: 0;

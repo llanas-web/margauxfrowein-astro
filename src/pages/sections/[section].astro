@@ -36,6 +36,10 @@ const {
   const swiper = new Swiper(".modal-swiper", {
     lazyPreloaderClass: "swiper-lazy-preloader",
     spaceBetween: 30,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
   });
 
   const sectionItems = document.querySelectorAll(".section-item");
@@ -118,6 +122,8 @@ const {
           ))
         }
       </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
     </div>
   </div>
 </SectionLayout>
