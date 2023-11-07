@@ -26,7 +26,6 @@ const height =
     if (!image || !placeholder) return;
 
     const displayImage = () => {
-      image?.classList.remove("opacity-0");
       placeholder?.classList.add("opacity-0");
     };
 
@@ -42,13 +41,13 @@ const height =
 
 <div class="strapi-image relative h-full w-full">
   <img
-    class={`strapi-image__real absolute top-0 left-0 w-full h-full opacity-0 transition-opacity duration-500 ${classNames}`}
+    class={`strapi-image__real absolute top-0 left-0 w-full h-full ${classNames}`}
     src={imageUrl}
     alt={description}
     loading={loading}
   />
   <img
-    class={`strapi-image__placeholder absolute top-0 left-0 w-full h-full blur-sm transition-opacity duration-500 ${classNames}`}
+    class={`strapi-image__placeholder absolute top-0 left-0 w-full h-full blur-sm transition-opacity ease-out duration-500 ${classNames}`}
     src={imagePlaceholderUrl}
     alt={description}
     width={width}
