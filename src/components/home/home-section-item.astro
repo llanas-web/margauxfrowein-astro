@@ -12,23 +12,67 @@ const { section } = Astro.props;
 const imageData = getDataAttributes<any>(section.cover);
 ---
 
-<article class="">
-  <div class="group aspect-square overflow-hidden shadow-lg rounded-sm">
-    <a href={`sections/${section.url}`}>
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animated");
+        }
+      });
+    },
+    {
+      threshold: 0.3,
+    }
+  );
+
+  const listHomeSectionItems = document.querySelectorAll(".home-section-item");
+  listHomeSectionItems.forEach((item) => {
+    observer.observe(item);
+  });
+</script>
+
+<article class="home-section-item">
+  <div
+    class="home-section-item__media relative
+    translate-y-6 opacity-0 transition-all duration-[750ms] ease-[ease]
+    after:w-full after:absolute after:top-0 after:right-0 after:h-full after:transition-all after:duration-[750ms] after:ease-[cubic-bezier(0.33, 0.32, 0.27, 1)] after:bg-slate-100
+    group aspect-square overflow-hidden rounded-sm"
+  >
+    <a class="" href={`sections/${section.url}`}>
       <StrapiImage
         image={getDataAttributes(imageData.image)}
         description={section.cover.description}
         format="medium"
-        classNames="w-full h-full object-cover group-hover:scale-[1.06] duration-700 ease-[ease] transition-all"
+        classNames="home-section-item__media__img w-full h-full object-cover group-hover:scale-[1.06] duration-700 ease-[ease] transition-all"
         hasPlaceholder={false}
       />
     </a>
   </div>
-  <div class="my-6">
+  <div
+    class="home-section-item__infos translate-y-6 opacity-0 transition-all duration-1000 delay-300 ease-[ease] my-6"
+  >
     <h3 class="text-3xl">
-      <a class="bg-gradient-to-r from-slate-700 to-slate-100 bg-[length:0%_1px] hover:bg-[length:100%_1px] bg-left-bottom bg-no-repeat transition-[background-size] duration-300 ease-[ease]" href={`sections/${section.url}`}>
+      <a
+        class="bg-gradient-to-r from-slate-700 to-slate-100 bg-[length:0%_1px] hover:bg-[length:100%_1px] bg-left-bottom bg-no-repeat transition-[background-size] duration-300 ease-[ease]"
+        href={`sections/${section.url}`}
+      >
         {section.title}
       </a>
     </h3>
   </div>
 </article>
+
+<style>
+  .home-section-item.animated .home-section-item__media {
+    @apply translate-y-0 opacity-100;
+  }
+
+  .home-section-item.animated .home-section-item__infos {
+    @apply translate-y-0 opacity-100;
+  }
+
+  .home-section-item.animated .home-section-item__media::after {
+    @apply w-0;
+  }
+</style>
