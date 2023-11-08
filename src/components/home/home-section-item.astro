@@ -22,7 +22,7 @@ const imageData = getDataAttributes<any>(section.cover);
       });
     },
     {
-      threshold: 0.3,
+      threshold: 0.4,
     }
   );
 
@@ -36,7 +36,7 @@ const imageData = getDataAttributes<any>(section.cover);
   <div
     class="home-section-item__media relative
     translate-y-6 opacity-0 transition-all duration-[750ms] ease-[ease]
-    after:w-full after:absolute after:top-0 after:right-0 after:h-full after:transition-all after:duration-[750ms] after:ease-[cubic-bezier(0.33, 0.32, 0.27, 1)] after:bg-slate-100
+    after:w-full after:absolute after:top-0 after:right-0 after:h-full after:transition-all after:duration-[750ms] after:ease-[cubic-bezier(0.33, 0.32, 0.27, 1)] after:bg-slate-100 dark:after:bg-slate-900
     group aspect-square overflow-hidden rounded-sm"
   >
     <a class="" href={`sections/${section.url}`}>

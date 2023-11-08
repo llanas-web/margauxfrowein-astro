@@ -37,10 +37,12 @@ const { title, cover, description } = Astro.props;
 
     <title>{title}</title>
   </head>
-  <body class="bg-slate-100 text-slate-900">
-    <header class="fixed w-full z-10">
+  <body
+    class="bg-slate-100 text-slate-900 dark:bg-slate-900 dark:text-slate-100"
+  >
+    <header class="fixed w-full z-20 top-0">
       <nav class="text-center p-4">
-        <a href="/"><h1 class="text-slate-900 text-4xl">Margaux FROWEIN</h1></a>
+        <a href="/"><h1 class="text-4xl">Margaux FROWEIN</h1></a>
       </nav>
     </header>
     <main>

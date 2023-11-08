@@ -10,7 +10,7 @@ const { photos } = Astro.props;
 
 <div
   id="section-modal"
-  class="hidden absolute w-full h-full top-0 left-0 p-6 bg-slate-100/90 z-10"
+  class="hidden absolute w-full h-full top-0 left-0 p-6 bg-slate-100 dark:bg-slate-900 z-10"
 >
   <div
     id="section-modal__closing"
@@ -44,7 +44,7 @@ const { photos } = Astro.props;
               loading={"lazy"}
             />
             <div class="absolute bottom-0 left-0 w-full">
-              <h2 class="text-xl text-slate-700 text-center">
+              <h2 class="text-xl text-slate-900 dark:text-slate-100 text-center">
                 {attributes.title}
               </h2>
             </div>
