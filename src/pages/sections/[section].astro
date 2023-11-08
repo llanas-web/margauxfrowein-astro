@@ -2,10 +2,11 @@
 import type { GetStaticPaths } from "astro";
 import SectionLayout from "../../layouts/section-layout.astro";
 import SectionHeader from "../../components/section/section-header.astro";
-import SectionItem from "../../components/section/section-item.astro";
-import StrapiImage from "../../components/lib/strapi/strapi-image.astro";
+import ModalPhotos from "../../components/section/modal/modal-photos.astro";
 import { useStrapi } from "../../api/strapi";
 import { getImageUrlFromFormat } from "../../lib/strapi-utils";
+import SectionPhotos from "../../components/section/section-photos.astro";
+import SectionPhotoItem from "../../components/section/section-photo-item.astro";
 
 export const getStaticPaths = (async () => {
   const { getSectionsUrl } = useStrapi();
@@ -52,7 +53,6 @@ const {
 
   const closingModal = document.querySelector("#section-modal__closing");
   closingModal?.addEventListener("click", () => {
-    console.log("clicked");
     document.getElementById("section-modal")?.classList.add("hidden");
   });
 </script>
@@ -70,62 +70,11 @@ const {
       cover={cover.data.attributes}
       description={description}
     />
-    <section class="p-6">
-      <div
-        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2"
-      >
-        {photos.data.map((photo: any) => <SectionItem photo={photo} />)}
-      </div>
-    </section>
+    <SectionPhotos>
+      {photos.data.map((photo: any) => <SectionPhotoItem photo={photo} />)}
+    </SectionPhotos>
   </article>
-  <div
-    id="section-modal"
-    class="hidden absolute w-full h-full top-0 left-0 p-6 bg-slate-100/90 z-10"
-  >
-    <div
-      id="section-modal__closing"
-      class="fixed top-0 left-0 cursor-pointer p-6 z-20"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke-width="1.5"
-        stroke="currentColor"
-        class="w-6 h-6"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-        ></path>
-      </svg>
-    </div>
-    <div class="swiper modal-swiper h-full w-full">
-      <div class="swiper-wrapper">
-        {
-          photos.data.map(({ attributes }: any) => (
-            <figure class="swiper-slide relative">
-              <StrapiImage
-                classNames="w-full h-full object-contain pb-12"
-                format="original"
-                image={attributes.image.data.attributes}
-                description={attributes.description}
-                loading={"lazy"}
-              />
-              <div class="absolute bottom-0 left-0 w-full">
-                <h2 class="text-xl text-slate-700 text-center">
-                  {attributes.title}
-                </h2>
-              </div>
-            </figure>
-          ))
-        }
-      </div>
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
-    </div>
-  </div>
+  <ModalPhotos photos={photos} />
 </SectionLayout>
 
 <style>
