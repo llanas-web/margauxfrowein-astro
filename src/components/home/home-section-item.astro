@@ -26,7 +26,9 @@ const imageData = getDataAttributes<any>(section.cover);
   </div>
   <div class="my-6">
     <h3 class="text-2xl">
-      {section.title}
+      <a class="bg-gradient-to-r from-slate-100 to-slate-100 bg-[length:0%_2px] hover:bg-[length:100%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-300 ease-[ease]" href={`sections/${section.url}`}>
+        {section.title}
+      </a>
     </h3>
   </div>
 </article>
