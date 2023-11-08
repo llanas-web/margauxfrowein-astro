@@ -17,6 +17,8 @@ const home = await getHome();
   )}
   description={home.data.attributes.seo_description}
 >
-  <HomeHeader photos={home.data.attributes.photos.data} />
+  <div class="fixed h-screen w-full top-0">
+    <HomeHeader photos={home.data.attributes.photos.data} />
+  </div>
   <HomeSections sections={home.data.attributes.sections.data} />
 </HomeLayout>
