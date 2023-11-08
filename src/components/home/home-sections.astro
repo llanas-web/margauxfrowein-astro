@@ -7,7 +7,8 @@ const { sections } = Astro.props;
 ---
 
 <div
-  class="grid p-8 grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+  class="grid p-8 grid-cols-1 gap-8
+            md:p-20 md:grid-cols-2 md:gap-20 [&>*:nth-child(even)]:md:mt-20"
 >
   {sections.map(({ attributes }) => <HomeSectionItem section={attributes} />)}
 </div>

@@ -6,12 +6,22 @@ interface Props {
   classNames: string;
   format: "thumbnail" | "small" | "medium" | "large" | "original";
   loading?: "eager" | "lazy" | null | undefined;
+  hasPlaceholder?: boolean;
 }
 
-const { image, description, format, classNames, loading = null } = Astro.props;
+const {
+  image,
+  description,
+  format,
+  classNames,
+  loading = null,
+  hasPlaceholder = true,
+} = Astro.props;
 
 const imageUrl = getImageUrlFromFormat(image, format);
-const imagePlaceholderUrl = getImageUrlFromFormat(image, "thumbnail");
+const imagePlaceholderUrl = hasPlaceholder
+  ? getImageUrlFromFormat(image, "thumbnail")
+  : null;
 const width = format === "original" ? image.width : image.formats[format].width;
 const height =
   format === "original" ? image.height : image.formats[format].height;
@@ -46,13 +56,17 @@ const height =
     alt={description}
     loading={loading}
   />
-  <img
-    class={`strapi-image__placeholder absolute top-0 left-0 w-full h-full blur-sm transition-opacity ease-out duration-500 ${classNames}`}
-    src={imagePlaceholderUrl}
-    alt={description}
-    width={width}
-    height={height}
-  />
+  {
+    hasPlaceholder ? (
+      <img
+        class={`strapi-image__placeholder absolute top-0 left-0 w-full h-full blur-sm transition-opacity ease-out duration-500 ${classNames}`}
+        src={imagePlaceholderUrl}
+        alt={description}
+        width={width}
+        height={height}
+      />
+    ) : null
+  }
 </div>
 
 <style>
