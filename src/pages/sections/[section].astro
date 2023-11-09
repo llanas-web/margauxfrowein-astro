@@ -59,7 +59,10 @@ const {
 
 <SectionLayout
   title={title}
-  thumbnail={getImageUrlFromFormat(thumbnail.data.attributes, "thumbnail")}
+  thumbnail={getImageUrlFromFormat(
+    thumbnail.data.attributes.image,
+    "thumbnail"
+  )}
   description={description}
   seo_title={seo_title}
   seo_description={seo_description}
