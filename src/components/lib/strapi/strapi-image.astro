@@ -1,10 +1,13 @@
 ---
-import { getImageUrlFromFormat } from "../../../lib/strapi-utils";
+import {
+  getImageUrlFromFormat,
+  type imageFormatSizes,
+} from "../../../lib/strapi-utils";
 interface Props {
   image: any;
   description: string;
   classNames: string;
-  format: "thumbnail" | "small" | "medium" | "large" | "original";
+  format: imageFormatSizes;
   loading?: "eager" | "lazy" | null | undefined;
   hasPlaceholder?: boolean;
 }

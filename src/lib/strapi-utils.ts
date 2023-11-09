@@ -2,12 +2,17 @@ export const getDataAttributes = <T>(entity: { data: { attributes: T } }) => {
   return entity?.data?.attributes;
 };
 
-const imageFormatSizes = ["thumbnail", "small", "medium", "large", "original"];
+const imageFormatSizes = [
+  "thumbnail",
+  "small",
+  "medium",
+  "large",
+  "xlarge",
+  "original",
+] as const;
+export type imageFormatSizes = (typeof imageFormatSizes)[number];
 
-export const getImageUrlFromFormat = (
-  image: any,
-  format: "thumbnail" | "small" | "medium" | "large" | "original"
-) => {
+export const getImageUrlFromFormat = (image: any, format: imageFormatSizes) => {
   if (!image) return null;
   if (format === "original") return image.url;
   else {
