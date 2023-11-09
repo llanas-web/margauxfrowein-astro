@@ -1,24 +1,27 @@
 ---
-import HomeLayout from "../layouts/home-layout.astro";
+import IndexLayout from "../layouts/index-layout.astro";
 import HomeHeader from "../components/home/home-header.astro";
 import HomeSections from "../components/home/home-sections.astro";
 import { useStrapi } from "../api/strapi";
 import { getImageUrlFromFormat } from "../lib/strapi-utils";
+import HomeNavbar from "../components/navbar/home-navbar.astro";
 
 const { getHome } = useStrapi();
 const home = await getHome();
 ---
 
-<HomeLayout
+<IndexLayout
   title={home.data.attributes.seo_title}
-  cover={getImageUrlFromFormat(
+  thumbnail={getImageUrlFromFormat(
     home.data.attributes.thumbnail.data.attributes,
     "thumbnail"
   )}
-  description={home.data.attributes.seo_description}
+  seo_title={home.data.attributes.seo_title}
+  seo_description={home.data.attributes.seo_description}
 >
+  <HomeNavbar slot="header" />
   <div class="fixed h-screen w-full top-0">
     <HomeHeader photos={home.data.attributes.photos.data} />
   </div>
   <HomeSections sections={home.data.attributes.sections.data} />
-</HomeLayout>
+</IndexLayout>

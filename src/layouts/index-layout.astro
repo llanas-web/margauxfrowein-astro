@@ -1,0 +1,62 @@
+---
+import CommonHead from "../components/common-head.astro";
+interface Props {
+  title: string;
+  thumbnail: string;
+  description?: string;
+  seo_title: string;
+  seo_description: string;
+}
+
+const { title, thumbnail, seo_title, seo_description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <CommonHead />
+    <!-- META twitter -->
+    <meta property="twitter:image" content={thumbnail} />
+    <meta property="twitter:title" content={seo_title} />
+    <meta property="twitter:description" content={seo_description} />
+
+    <meta property="og:image" content={thumbnail} />
+    <meta property="og:title" content={seo_title} />
+    <meta property="og:description" content={seo_description} />
+    <meta property="og:url" content="https://www.margaux-frowein.com" />
+
+    <title>{title}</title>
+  </head>
+  <body
+    class="bg-slate-100 text-slate-900 dark:bg-slate-900 dark:text-slate-100"
+  >
+    <header>
+      <slot name="header" />
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer></footer>
+    <style is:global>
+      * {
+        --swiper-pagination-color: theme(colors.slate.50 / 75%);
+        --swiper-pagination-bullet-size: 0.8em;
+      }
+
+      @media screen(sm) {
+        * {
+          --swiper-pagination-bullet-size: 8px;
+          --swiper-pagination-top-offset: 50%;
+          --swiper-pagination-sides-offset: 10px;
+        }
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+    </style>
+  </body>
+</html>

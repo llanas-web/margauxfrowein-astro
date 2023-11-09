@@ -1,12 +1,13 @@
 ---
 import type { GetStaticPaths } from "astro";
-import SectionLayout from "../../layouts/section-layout.astro";
+import IndexLayout from "../../layouts/index-layout.astro";
 import SectionHeader from "../../components/section/section-header.astro";
 import ModalPhotos from "../../components/section/modal/modal-photos.astro";
 import { useStrapi } from "../../api/strapi";
 import { getImageUrlFromFormat } from "../../lib/strapi-utils";
 import SectionPhotos from "../../components/section/section-photos.astro";
 import SectionPhotoItem from "../../components/section/section-photo-item.astro";
+import SectionNavbar from "../../components/navbar/section-navbar.astro";
 
 export const getStaticPaths = (async () => {
   const { getSectionsUrl } = useStrapi();
@@ -57,7 +58,7 @@ const {
   });
 </script>
 
-<SectionLayout
+<IndexLayout
   title={title}
   thumbnail={getImageUrlFromFormat(
     thumbnail.data.attributes.image,
@@ -67,6 +68,7 @@ const {
   seo_title={seo_title}
   seo_description={seo_description}
 >
+  <SectionNavbar slot="header" />
   <article class="section">
     <SectionHeader
       title={title}
@@ -78,7 +80,7 @@ const {
     </SectionPhotos>
   </article>
   <ModalPhotos photos={photos} />
-</SectionLayout>
+</IndexLayout>
 
 <style>
   .section {
