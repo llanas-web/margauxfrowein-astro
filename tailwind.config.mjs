@@ -4,6 +4,7 @@ export default {
   theme: {
     fontFamily: {
       sans: ["Poiret One", "sans-serif"],
+      writen: ["Dynalight", "cursive"],
     },
     extend: {},
   },

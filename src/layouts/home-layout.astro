@@ -31,7 +31,7 @@ const { title, cover, description } = Astro.props;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Dynalight&family=Poiret+One&display=swap"
       rel="stylesheet"
     />
 
@@ -41,8 +41,15 @@ const { title, cover, description } = Astro.props;
     class="bg-slate-100 text-slate-900 dark:bg-slate-900 dark:text-slate-100"
   >
     <header class="fixed w-full z-20 top-0">
-      <nav class="text-center p-4">
-        <a href="/"><h1 class="text-4xl">Margaux FROWEIN</h1></a>
+      <nav class="p-4">
+        <ul class="flex justify-between items-center text-left">
+          <li>
+            <a href="/">
+              <h1 class="text-4xl font-writen">Margaux Frowein</h1>
+            </a>
+          </li>
+          <li></li>
+        </ul>
       </nav>
     </header>
     <main>
@@ -65,6 +72,14 @@ const { title, cover, description } = Astro.props;
       --swiper-pagination-sides-offset: 10px;
     }
   }
+
+  @font-face {
+    font-family: "savoye_let";
+    src: url("/fonts/savoye_let/savoye_let.ttf") format("ttf");
+    font-weight: normal;
+    font-style: normal;
+  }
+
   html,
   body {
     margin: 0;
