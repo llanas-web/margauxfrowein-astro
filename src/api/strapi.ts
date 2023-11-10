@@ -24,6 +24,23 @@ export const useStrapi = () => {
     return await response.json();
   };
 
+  const getAbout = async () => {
+    const sqString = qs.stringify({
+      populate: {
+        photo: {
+          populate: "image.formats",
+        },
+      },
+    });
+    const request = new Request(
+      `${import.meta.env.STRAPI_URL}/api/about?${sqString}`
+    );
+    const response = await fetch(request, {
+      method: "GET",
+    });
+    return await response.json();
+  };
+
   const getSectionsUrl = async (): Promise<string[]> => {
     const sqString = qs.stringify({
       populate: {
@@ -77,5 +94,6 @@ export const useStrapi = () => {
     getHome,
     getSectionsUrl,
     getSectionDetails,
+    getAbout,
   };
 };
