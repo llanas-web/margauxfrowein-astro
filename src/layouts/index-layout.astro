@@ -25,6 +25,9 @@ const { title, thumbnail, seo_title, seo_description } = Astro.props;
     <meta property="og:description" content={seo_description} />
     <meta property="og:url" content="https://www.margaux-frowein.com" />
 
+    <!-- Add link to index.css -->
+    <link rel="stylesheet" href="/index.css" />
+
     <title>{title}</title>
   </head>
   <body
@@ -51,6 +54,16 @@ const { title, thumbnail, seo_title, seo_description } = Astro.props;
           --swiper-pagination-bullet-size: 8px;
           --swiper-pagination-top-offset: 50%;
           --swiper-pagination-sides-offset: 10px;
+        }
+      }
+
+      @tailwind base;
+      @tailwind components;
+      @tailwind utilities;
+
+      @layer components {
+        .gr-underline {
+          @apply bg-gradient-to-r from-slate-700 to-slate-100 bg-[length:0%_1px] hover:bg-[length:100%_1px] bg-left-bottom bg-no-repeat transition-[background-size] duration-300 ease-[ease];
         }
       }
 
