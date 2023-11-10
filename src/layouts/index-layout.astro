@@ -30,6 +30,9 @@ const { title, thumbnail, seo_title, seo_description } = Astro.props;
   <body
     class="bg-slate-100 text-slate-900 dark:bg-slate-900 dark:text-slate-100"
   >
+    <nav>
+      <slot name="navbar" />
+    </nav>
     <header>
       <slot name="header" />
     </header>

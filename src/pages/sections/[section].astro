@@ -7,7 +7,7 @@ import { useStrapi } from "../../api/strapi";
 import { getImageUrlFromFormat } from "../../lib/strapi-utils";
 import SectionPhotos from "../../components/section/section-photos.astro";
 import SectionPhotoItem from "../../components/section/section-photo-item.astro";
-import SectionNavbar from "../../components/navbar/section-navbar.astro";
+import SectionNavbar from "../../components/section/section-navbar.astro";
 
 export const getStaticPaths = (async () => {
   const { getSectionsUrl } = useStrapi();
@@ -68,7 +68,7 @@ const {
   seo_title={seo_title}
   seo_description={seo_description}
 >
-  <SectionNavbar slot="header" />
+  <SectionNavbar slot="navbar" />
   <article class="section">
     <SectionHeader
       title={title}
