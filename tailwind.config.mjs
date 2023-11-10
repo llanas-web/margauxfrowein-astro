@@ -5,6 +5,7 @@ export default {
     fontFamily: {
       sans: ["Poiret One", "sans-serif"],
       writen: ["Dynalight", "cursive"],
+      roboto: ["Roboto", "sans-serif"],
     },
     extend: {},
   },
