@@ -1,0 +1,17 @@
+---
+import SectionNavbar from "../components/section/section-navbar.astro";
+import IndexLayout from "../layouts/index-layout.astro";
+---
+
+<IndexLayout
+  title="About me"
+  description="About me"
+  seo_title="About Margaux FROWEIN"
+  seo_description="Description of Margaux FROWEIN work as a Photographer"
+  thumbnail="/images/og-image.jpg"
+>
+  <SectionNavbar slot="navbar" />
+  <div>
+    <h2>content</h2>
+  </div>
+</IndexLayout>
