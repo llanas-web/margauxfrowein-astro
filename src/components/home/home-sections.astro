@@ -4,10 +4,12 @@ interface Props {
   sections: any[];
 }
 const { sections } = Astro.props;
+const edit = !import.meta.env.PROD;
 ---
 
 <div
   class="z-10 bg-slate-100 text-slate-900 dark:bg-slate-900 dark:text-slate-100 relative mt-[100vh] grid p-8 grid-cols-1 gap-8 md:p-20 md:grid-cols-2 md:gap-20 [&>*:nth-child(even)]:md:mt-20 [&>*:nth-child(odd)]:md:text-right"
 >
   {sections.map(({ attributes }) => <HomeSectionItem section={attributes} />)}
+  {edit ? <div class="p-20">Edition Mode</div> : ""}
 </div>
